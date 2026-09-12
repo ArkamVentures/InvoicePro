@@ -46,9 +46,9 @@ export default function InvoicePreview({
                 <thead>
                   <tr>
                     <th>{invoice.lblItemDesc || "Item / Service description"}</th>
-                    <th className="num" style={{ width: 70 }}>{invoice.lblQty || "Qty"}</th>
-                    <th className="num" style={{ width: 110 }}>{invoice.lblRate || "Rate"}</th>
-                    <th className="num" style={{ width: 110 }}>{invoice.lblTotal || "Total"}</th>
+                    <th className="num" style={{ width: 60 }}>{invoice.lblQty || "Qty"}</th>
+                    <th className="num" style={{ width: 140 }}>{invoice.lblRate || "Rate"}</th>
+                    <th className="num" style={{ width: 140 }}>{invoice.lblTotal || "Total"}</th>
                   </tr>
                 </thead>
                 <tbody>

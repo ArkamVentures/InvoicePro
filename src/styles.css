@@ -162,7 +162,7 @@ table.items thead th:first-child{border-radius:16px 0 0 16px;}
 table.items thead th:last-child{border-radius:0 16px 16px 0;}
 table.items thead th.num{text-align:right;}
 table.items tbody td{padding:13px 14px;font-size:15px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--graphite);position:relative;z-index:1;}
-table.items tbody td.num{text-align:right;font-weight:700;}
+table.items tbody td.num{text-align:right;font-weight:700;white-space:nowrap;}
 .desc-main{font-weight:700;color:var(--graphite);}
 
 .items-wrap{position:relative;background:var(--wash);border-radius:16px;padding:28px 6px 10px;}
