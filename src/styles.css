@@ -20,9 +20,9 @@ h1,h2,h3,.label,.mono-label{font-family:'Poppins',sans-serif;}
 .boot-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--graphite);color:var(--silver-light);font-family:'Poppins';}
 
 /* ---- App shell ---- */
-.app{display:grid;grid-template-columns:420px 8px 1fr;min-height:100vh;}
+.app{display:grid;grid-template-columns:420px 8px 1fr;height:100vh;overflow:hidden;}
 .app.resizing{user-select:none;cursor:col-resize;}
-@media (max-width:980px){.app{grid-template-columns:1fr !important;}}
+@media (max-width:980px){.app{grid-template-columns:1fr !important;height:auto !important;overflow:visible !important;}}
 
 .resizer-handle{
   width:8px;
@@ -51,10 +51,10 @@ h1,h2,h3,.label,.mono-label{font-family:'Poppins',sans-serif;}
 }
 @media (max-width:980px){.resizer-handle{display:none;}}
 
-.panel-wrap{display:flex;flex-direction:column;background:var(--graphite);}
+.panel-wrap{display:flex;flex-direction:column;background:var(--graphite);height:100vh;overflow-y:auto;}
 
 .session-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:14px 26px;border-bottom:1px solid #33393e;color:var(--silver);font-size:12.5px;}
+  padding:14px 26px;border-bottom:1px solid #33393e;color:var(--silver);font-size:12.5px;position:sticky;top:0;background:var(--graphite);z-index:5;}
 .session-email{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .session-signout{background:none;border:1px solid #3a4045;color:var(--silver-light);border-radius:2px;
   padding:5px 10px;font-family:'Inter';font-size:12px;cursor:pointer;flex:0 0 auto;}
@@ -109,7 +109,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--safety);outline-
 .toast.show{opacity:1;}
 
 /* ---- Right: invoice preview ---- */
-.stage{background:#e5e3de;padding:30px 32px 50px;display:flex;flex-direction:column;align-items:center;}
+.stage{background:#e5e3de;padding:30px 32px 50px;display:flex;flex-direction:column;align-items:center;height:100vh;overflow-y:auto;}
 @media (max-width:980px){.stage{padding:20px 12px;}}
 
 .preview-toolbar{
