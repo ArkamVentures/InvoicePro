@@ -136,9 +136,6 @@ export default function InvoicePreview({
                               onBlur={(e) => onItemField && onItemField(i, "desc", e.currentTarget.innerText)}
                             >
                               {it.desc || "Item description..."}
-                            </span>{" "}
-                            <span style={{ fontWeight: 400, color: "var(--steel-light)", fontSize: 12 }}>
-                              ({it.unit || "nos"})
                             </span>
                           </div>
                         </td>

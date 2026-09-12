@@ -112,7 +112,7 @@ export default function InvoiceForm({
                 onChange={(e) => onItemField(idx, "desc", e.target.value)}
                 placeholder="Product or service details..."
               />
-              <div className="item-grid">
+              <div className="row2" style={{ marginTop: 8 }}>
                 <div>
                   <label>Qty</label>
                   <input
@@ -123,15 +123,7 @@ export default function InvoiceForm({
                   />
                 </div>
                 <div>
-                  <label>Unit</label>
-                  <select value={it.unit || "nos"} onChange={(e) => onItemField(idx, "unit", e.target.value)}>
-                    {UNITS.map((u) => (
-                      <option key={u} value={u}>{u}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label>Rate ({invoice.currency || "₹"})</label>
+                  <label>Rate ({invoice.currency || "Rs. "})</label>
                   <input
                     type="number"
                     step="0.01"
