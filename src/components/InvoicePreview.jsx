@@ -64,7 +64,9 @@ export default function InvoicePreview({
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblInvDate")}>
                       {invoice.lblInvDate ?? "DATE:"}
                     </span>{" "}
-                    <b>{invoice.invDate ? fmtDate(invoice.invDate) : "—"}</b>
+                    <b contentEditable suppressContentEditableWarning onBlur={handleEdit("invDate")}>
+                      {invoice.invDate ? fmtDate(invoice.invDate) : "—"}
+                    </b>
                   </div>
                 )}
                 {(invoice.lblDueDate !== "" || invoice.dueDate !== "") && (
