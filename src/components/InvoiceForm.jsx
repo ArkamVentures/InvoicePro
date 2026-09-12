@@ -23,8 +23,8 @@ export default function InvoiceForm({
       <div className="brand-sub">Universal Business Billing &amp; Template Generator</div>
 
       <fieldset>
-        <legend>Business Preset</legend>
-        <label>Select Business Industry / Category</label>
+        <legend>Business Industry Preset (Optional)</legend>
+        <label>Quick Starter Preset</label>
         <select
           value={invoice.bizType || "general"}
           onChange={(e) => onApplyPreset(e.target.value)}
@@ -36,7 +36,7 @@ export default function InvoiceForm({
           ))}
         </select>
         <div className="hint" style={{ marginTop: 6 }}>
-          Selecting a business preset loads sample invoice defaults for that industry.
+          💡 <b>Not compulsory!</b> This dropdown is just an optional shortcut to auto-fill sample text. You can type any company name, industry, items, or labels manually below for <i>any</i> business in the world!
         </div>
       </fieldset>
 

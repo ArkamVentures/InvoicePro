@@ -15,10 +15,16 @@ export const UNITS = [
 
 export const BUSINESS_TYPES = [
   { id: "general", label: "General Business / Services" },
-  { id: "aluminium", label: "Aluminium Fabrication" },
-  { id: "retail", label: "Retail & Trading" },
-  { id: "freelance", label: "Freelance & Consulting" },
-  { id: "construction", label: "Construction & Contractors" },
+  { id: "aluminium", label: "Aluminium Fabrication & Glass" },
+  { id: "retail", label: "Retail & Wholesale Trading" },
+  { id: "freelance", label: "Freelance, IT & Consulting" },
+  { id: "construction", label: "Construction, Real Estate & Contractors" },
+  { id: "automotive", label: "Automotive & Vehicle Service" },
+  { id: "healthcare", label: "Healthcare & Medical Services" },
+  { id: "hospitality", label: "Hotels, Restaurants & Catering" },
+  { id: "education", label: "Education & Coaching Services" },
+  { id: "logistics", label: "Logistics, Freight & Transport" },
+  { id: "custom", label: "✨ Custom Industry (Type Your Own)" },
 ];
 
 export function money(n, currencySymbol = "₹") {
