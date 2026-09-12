@@ -23,24 +23,6 @@ export default function InvoiceForm({
       <div className="brand-sub">Universal Business Billing &amp; Template Generator</div>
 
       <fieldset>
-        <legend>Business Industry Preset (Optional)</legend>
-        <label>Quick Starter Preset</label>
-        <select
-          value={invoice.bizType || "general"}
-          onChange={(e) => onApplyPreset(e.target.value)}
-        >
-          {BUSINESS_TYPES.map((bt) => (
-            <option key={bt.id} value={bt.id}>
-              {bt.label}
-            </option>
-          ))}
-        </select>
-        <div className="hint" style={{ marginTop: 6 }}>
-          💡 <b>Not compulsory!</b> This dropdown is just an optional shortcut to auto-fill sample text. You can type any company name, industry, items, or labels manually below for <i>any</i> business in the world!
-        </div>
-      </fieldset>
-
-      <fieldset>
         <legend>Your Company / Business</legend>
         <label>Company / Business Name</label>
         <input value={invoice.coName || ""} onChange={set("coName")} placeholder="e.g. Apex Enterprises" />
