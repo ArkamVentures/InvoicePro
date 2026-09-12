@@ -71,57 +71,57 @@ export default function InvoicePreview({
               </table>
 
               <div className="totals">
-                <table>
-                  <tbody>
-                    {totals.discPct > 0 && (
-                      <tr>
-                        <td className="tk">Discount ({totals.discPct}%)</td>
-                        <td className="tv">-{money(totals.discAmt, currencySymbol)}</td>
-                      </tr>
-                    )}
-                    {showGstRows && (
-                      <>
-                        <tr>
-                          <td className="tk">CGST ({totals.gstHalf}%)</td>
-                          <td className="tv">{money(totals.cgst, currencySymbol)}</td>
-                        </tr>
-                        <tr>
-                          <td className="tk">SGST ({totals.gstHalf}%)</td>
-                          <td className="tv">{money(totals.sgst, currencySymbol)}</td>
-                        </tr>
-                      </>
-                    )}
-                    <tr className="grand">
-                      <td>Grand total</td>
-                      <td className="tv">{money(totals.grand, currencySymbol)}</td>
+              <table>
+                <tbody>
+                  {totals.discPct > 0 && (
+                    <tr>
+                      <td className="tk">Discount ({totals.discPct}%)</td>
+                      <td className="tv">-{money(totals.discAmt, currencySymbol)}</td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="lower">
-              <div>
-                <div className="block-title">{invoice.lblPayTerms || "PAYMENT TERMS"}</div>
-                <div className="terms">{invoice.terms || "—"}</div>
-                <div className="block-title" style={{ marginTop: 16 }}>{invoice.lblNotes || "NOTES"}</div>
-                <div className="notes">{invoice.notes || "—"}</div>
-              </div>
-              <div>
-                <div className="block-title">{invoice.lblBankDetails || "BANK / PAYMENT DETAILS"}</div>
-                <div className="bank">
-                  <div><b>{invoice.lblBankName || "Bank/Account"}:</b> <span>{invoice.bankName || "—"}</span></div>
-                  <div><b>{invoice.lblBankAcc || "A/C No."}:</b> <span>{invoice.bankAcc || "—"}</span></div>
-                  <div><b>{invoice.lblBankIfsc || "IFSC / Code"}:</b> <span>{invoice.bankIfsc || "—"}</span></div>
-                </div>
-              </div>
-            </div>
-
-            <div className="signoff">
-              <div className="stamp">{invoice.lblFooterNotice || "This is a computer-generated invoice."}</div>
-              <div className="sig-line">{invoice.lblSignoff || "Authorised Signatory"}</div>
+                  )}
+                  {showGstRows && (
+                    <>
+                      <tr>
+                        <td className="tk">CGST ({totals.gstHalf}%)</td>
+                        <td className="tv">{money(totals.cgst, currencySymbol)}</td>
+                      </tr>
+                      <tr>
+                        <td className="tk">SGST ({totals.gstHalf}%)</td>
+                        <td className="tv">{money(totals.sgst, currencySymbol)}</td>
+                      </tr>
+                    </>
+                  )}
+                  <tr className="grand">
+                    <td>Grand total</td>
+                    <td className="tv">{money(totals.grand, currencySymbol)}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
+
+          <div className="lower">
+            <div>
+              <div className="block-title">{invoice.lblPayTerms || "PAYMENT TERMS"}</div>
+              <div className="terms">{invoice.terms || "—"}</div>
+              <div className="block-title" style={{ marginTop: 16 }}>{invoice.lblNotes || "NOTES"}</div>
+              <div className="notes">{invoice.notes || "—"}</div>
+            </div>
+            <div>
+              <div className="block-title">{invoice.lblBankDetails || "BANK / PAYMENT DETAILS"}</div>
+              <div className="bank">
+                <div><b>{invoice.lblBankName || "Bank/Account"}:</b> <span>{invoice.bankName || "—"}</span></div>
+                <div><b>{invoice.lblBankAcc || "A/C No."}:</b> <span>{invoice.bankAcc || "—"}</span></div>
+                <div><b>{invoice.lblBankIfsc || "IFSC / Code"}:</b> <span>{invoice.bankIfsc || "—"}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="signoff">
+            <div className="stamp">{invoice.lblFooterNotice || "This is a computer-generated invoice."}</div>
+            <div className="sig-line">{invoice.lblSignoff || "Authorised Signatory"}</div>
+          </div>
+        </div>
           <div className="foot-strip">
             <span className="phone">📞 <span>{invoice.coPhone || "Contact"}</span></span>
             <span>{invoice.coName || "InvoicePro"}</span>
