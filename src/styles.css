@@ -242,9 +242,70 @@ table.items tbody td.num{text-align:right;font-weight:700;}
 .template-actions .btn{padding:8px 10px;font-size:12.5px;}
 
 @media print{
-  body{background:#fff;}
-  .panel-wrap,.toast,.modal-overlay,.session-bar{display:none !important;}
-  .app{display:block;}
-  .stage{background:#fff;padding:0;}
-  .sheet{box-shadow:none;max-width:100%;}
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  html, body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .panel-wrap, .resizer-handle, .preview-toolbar, .toast, .modal-overlay, .session-bar {
+    display: none !important;
+  }
+  .app {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .stage {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+  .sheet {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 297mm !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    page-break-inside: avoid !important;
+    break-after: avoid !important;
+    break-before: avoid !important;
+    break-inside: avoid !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+  .sheet-inner {
+    padding: 24px 30px 10px !important;
+    flex: 1 !important;
+  }
+  .items-wrap {
+    padding: 16px 6px 6px !important;
+  }
+  table.items tbody td {
+    padding: 8px 10px !important;
+  }
+  .lower {
+    margin-top: 14px !important;
+    padding: 12px 6px 4px !important;
+  }
+  .foot-strip {
+    margin: 10px 20px 14px !important;
+    padding: 10px 16px !important;
+  }
 }
