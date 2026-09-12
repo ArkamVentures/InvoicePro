@@ -49,42 +49,56 @@ export default function InvoicePreview({
                 </div>
               </div>
               <div className="doc-title">
-                <div>
-                  <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblCustId")}>
-                    {invoice.lblCustId || "CUSTOMER ID"}
-                  </span>:{" "}
-                  <b contentEditable suppressContentEditableWarning onBlur={handleEdit("custId")}>
-                    {invoice.custId || "—"}
-                  </b>
-                </div>
-                <div>
-                  <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblInvDate")}>
-                    {invoice.lblInvDate || "DATE"}
-                  </span>:{" "}
-                  <b>{fmtDate(invoice.invDate)}</b>
-                </div>
-                <div>
-                  <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblDueDate")}>
-                    {invoice.lblDueDate || "DUE DATE"}
-                  </span>:{" "}
-                  <b>{invoice.dueDate ? fmtDate(invoice.dueDate) : "—"}</b>
-                </div>
-                <div>
-                  <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblPoNo")}>
-                    {invoice.lblPoNo || "PO / REF NO"}
-                  </span>:{" "}
-                  <b contentEditable suppressContentEditableWarning onBlur={handleEdit("poNo")}>
-                    {invoice.poNo || "—"}
-                  </b>
-                </div>
-                <div>
-                  <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblClient")}>
-                    {invoice.lblClient || "CLIENT"}
-                  </span>:{" "}
-                  <b contentEditable suppressContentEditableWarning onBlur={handleEdit("clName")}>
-                    {invoice.clName || "—"}
-                  </b>
-                </div>
+                {(invoice.lblCustId !== "" || invoice.custId !== "") && (
+                  <div>
+                    <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblCustId")}>
+                      {invoice.lblCustId ?? "CUSTOMER ID"}
+                    </span>
+                    {(invoice.lblCustId !== "" || invoice.custId !== "") && ": "}
+                    <b contentEditable suppressContentEditableWarning onBlur={handleEdit("custId")}>
+                      {invoice.custId || "—"}
+                    </b>
+                  </div>
+                )}
+                {(invoice.lblInvDate !== "" || invoice.invDate !== "") && (
+                  <div>
+                    <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblInvDate")}>
+                      {invoice.lblInvDate ?? "DATE"}
+                    </span>
+                    {(invoice.lblInvDate !== "" || invoice.invDate !== "") && ": "}
+                    <b>{fmtDate(invoice.invDate)}</b>
+                  </div>
+                )}
+                {(invoice.lblDueDate !== "" || invoice.dueDate !== "") && (
+                  <div>
+                    <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblDueDate")}>
+                      {invoice.lblDueDate ?? "DUE DATE"}
+                    </span>
+                    {(invoice.lblDueDate !== "" || invoice.dueDate !== "") && ": "}
+                    <b>{invoice.dueDate ? fmtDate(invoice.dueDate) : "—"}</b>
+                  </div>
+                )}
+                {(invoice.lblPoNo || invoice.poNo) && (
+                  <div>
+                    <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblPoNo")}>
+                      {invoice.lblPoNo ?? "PO / REF NO"}
+                    </span>:{" "}
+                    <b contentEditable suppressContentEditableWarning onBlur={handleEdit("poNo")}>
+                      {invoice.poNo || "—"}
+                    </b>
+                  </div>
+                )}
+                {(invoice.lblClient !== "" || invoice.clName !== "") && (
+                  <div>
+                    <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblClient")}>
+                      {invoice.lblClient ?? "CLIENT"}
+                    </span>
+                    {(invoice.lblClient !== "" || invoice.clName !== "") && ": "}
+                    <b contentEditable suppressContentEditableWarning onBlur={handleEdit("clName")}>
+                      {invoice.clName || "—"}
+                    </b>
+                  </div>
+                )}
               </div>
             </div>
 
