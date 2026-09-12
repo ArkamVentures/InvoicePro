@@ -170,6 +170,34 @@ export default function InvoiceForm({
       </fieldset>
 
       <fieldset>
+        <legend>Custom Field Labels (Customize Text &amp; Headings)</legend>
+        <div className="row2">
+          <div><label>Customer ID Label</label><input value={invoice.lblCustId || "CUSTOMER ID"} onChange={set("lblCustId")} /></div>
+          <div><label>Invoice Date Label</label><input value={invoice.lblInvDate || "DATE"} onChange={set("lblInvDate")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Due Date Label</label><input value={invoice.lblDueDate || "DUE DATE"} onChange={set("lblDueDate")} /></div>
+          <div><label>PO / Reference Label</label><input value={invoice.lblPoNo || "PO / REF NO"} onChange={set("lblPoNo")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Client Heading Label</label><input value={invoice.lblClient || "CLIENT"} onChange={set("lblClient")} /></div>
+          <div><label>Item Description Header</label><input value={invoice.lblItemDesc || "Item / Service description"} onChange={set("lblItemDesc")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Qty Column Header</label><input value={invoice.lblQty || "Qty"} onChange={set("lblQty")} /></div>
+          <div><label>Rate Column Header</label><input value={invoice.lblRate || "Rate"} onChange={set("lblRate")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Payment Terms Title</label><input value={invoice.lblPayTerms || "PAYMENT TERMS"} onChange={set("lblPayTerms")} /></div>
+          <div><label>Notes Title</label><input value={invoice.lblNotes || "NOTES"} onChange={set("lblNotes")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Bank Details Title</label><input value={invoice.lblBankDetails || "BANK / PAYMENT DETAILS"} onChange={set("lblBankDetails")} /></div>
+          <div><label>Signoff Text</label><input value={invoice.lblSignoff || "Authorised Signatory"} onChange={set("lblSignoff")} /></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
         <legend>My Custom Templates</legend>
         <div className="template-actions">
           <button className="btn btn-ghost" type="button" onClick={onSaveTemplate}>

@@ -91,6 +91,25 @@ export function defaultInvoice(bizType = "general") {
       { desc: "Cloud Infrastructure Setup", qty: 1, unit: "hrs", rate: 15000 },
       { desc: "Annual Technical Support", qty: 12, unit: "nos", rate: 2500 },
     ],
+    // Customizable Field Labels
+    lblInvTitle: "TAX INVOICE",
+    lblCustId: "CUSTOMER ID",
+    lblInvDate: "DATE",
+    lblDueDate: "DUE DATE",
+    lblPoNo: "PO / REF NO",
+    lblClient: "CLIENT",
+    lblItemDesc: "Item / Service description",
+    lblQty: "Qty",
+    lblRate: "Rate",
+    lblTotal: "Total",
+    lblPayTerms: "PAYMENT TERMS",
+    lblNotes: "NOTES",
+    lblBankDetails: "BANK / PAYMENT DETAILS",
+    lblBankName: "Bank/Account",
+    lblBankAcc: "A/C No.",
+    lblBankIfsc: "IFSC / Code",
+    lblSignoff: "Authorised Signatory",
+    lblFooterNotice: "This is a computer-generated invoice."
   };
 
   if (bizType === "aluminium") {

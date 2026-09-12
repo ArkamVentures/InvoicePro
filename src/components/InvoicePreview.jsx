@@ -17,9 +17,11 @@ export default function InvoicePreview({ invoice }) {
               </div>
             </div>
             <div className="doc-title">
-              <div>CUSTOMER ID: <b>{invoice.custId || "—"}</b></div>
-              <div>DATE: <b>{fmtDate(invoice.invDate)}</b></div>
-              <div>CLIENT: <b>{invoice.clName || "—"}</b></div>
+              <div>{invoice.lblCustId || "CUSTOMER ID"}: <b>{invoice.custId || "—"}</b></div>
+              <div>{invoice.lblInvDate || "DATE"}: <b>{fmtDate(invoice.invDate)}</b></div>
+              {invoice.dueDate && <div>{invoice.lblDueDate || "DUE DATE"}: <b>{fmtDate(invoice.dueDate)}</b></div>}
+              {invoice.poNo && <div>{invoice.lblPoNo || "PO / REF NO"}: <b>{invoice.poNo}</b></div>}
+              <div>{invoice.lblClient || "CLIENT"}: <b>{invoice.clName || "—"}</b></div>
             </div>
           </div>
           <div className="co-meta">{invoice.coAddr}</div>
@@ -35,10 +37,10 @@ export default function InvoicePreview({ invoice }) {
             <table className="items">
               <thead>
                 <tr>
-                  <th>Item / Service description</th>
-                  <th className="num" style={{ width: 70 }}>Qty</th>
-                  <th className="num" style={{ width: 110 }}>Rate</th>
-                  <th className="num" style={{ width: 110 }}>Total</th>
+                  <th>{invoice.lblItemDesc || "Item / Service description"}</th>
+                  <th className="num" style={{ width: 70 }}>{invoice.lblQty || "Qty"}</th>
+                  <th className="num" style={{ width: 110 }}>{invoice.lblRate || "Rate"}</th>
+                  <th className="num" style={{ width: 110 }}>{invoice.lblTotal || "Total"}</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,24 +94,24 @@ export default function InvoicePreview({ invoice }) {
 
           <div className="lower">
             <div>
-              <div className="block-title">PAYMENT TERMS</div>
+              <div className="block-title">{invoice.lblPayTerms || "PAYMENT TERMS"}</div>
               <div className="terms">{invoice.terms}</div>
-              <div className="block-title" style={{ marginTop: 16 }}>NOTES</div>
+              <div className="block-title" style={{ marginTop: 16 }}>{invoice.lblNotes || "NOTES"}</div>
               <div className="notes">{invoice.notes}</div>
             </div>
             <div>
-              <div className="block-title">BANK / PAYMENT DETAILS</div>
+              <div className="block-title">{invoice.lblBankDetails || "BANK / PAYMENT DETAILS"}</div>
               <div className="bank">
-                <div><b>Bank/Account:</b> <span>{invoice.bankName}</span></div>
-                <div><b>A/C No.:</b> <span>{invoice.bankAcc}</span></div>
-                <div><b>IFSC / Code:</b> <span>{invoice.bankIfsc}</span></div>
+                <div><b>{invoice.lblBankName || "Bank/Account"}:</b> <span>{invoice.bankName}</span></div>
+                <div><b>{invoice.lblBankAcc || "A/C No."}:</b> <span>{invoice.bankAcc}</span></div>
+                <div><b>{invoice.lblBankIfsc || "IFSC / Code"}:</b> <span>{invoice.bankIfsc}</span></div>
               </div>
             </div>
           </div>
 
           <div className="signoff">
-            <div className="stamp">This is a computer-generated invoice.</div>
-            <div className="sig-line">Authorised Signatory</div>
+            <div className="stamp">{invoice.lblFooterNotice || "This is a computer-generated invoice."}</div>
+            <div className="sig-line">{invoice.lblSignoff || "Authorised Signatory"}</div>
           </div>
         </div>
         <div className="foot-strip">
