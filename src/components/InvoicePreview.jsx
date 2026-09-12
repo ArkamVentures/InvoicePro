@@ -52,9 +52,8 @@ export default function InvoicePreview({
                 {(invoice.lblCustId !== "" || invoice.custId !== "") && (
                   <div>
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblCustId")}>
-                      {invoice.lblCustId ?? "CUSTOMER ID"}
-                    </span>
-                    {(invoice.lblCustId !== "" || invoice.custId !== "") && ": "}
+                      {invoice.lblCustId ?? "CUSTOMER ID:"}
+                    </span>{" "}
                     <b contentEditable suppressContentEditableWarning onBlur={handleEdit("custId")}>
                       {invoice.custId || "—"}
                     </b>
@@ -63,26 +62,24 @@ export default function InvoicePreview({
                 {(invoice.lblInvDate !== "" || invoice.invDate !== "") && (
                   <div>
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblInvDate")}>
-                      {invoice.lblInvDate ?? "DATE"}
-                    </span>
-                    {(invoice.lblInvDate !== "" || invoice.invDate !== "") && ": "}
+                      {invoice.lblInvDate ?? "DATE:"}
+                    </span>{" "}
                     <b>{fmtDate(invoice.invDate)}</b>
                   </div>
                 )}
                 {(invoice.lblDueDate !== "" || invoice.dueDate !== "") && (
                   <div>
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblDueDate")}>
-                      {invoice.lblDueDate ?? "DUE DATE"}
-                    </span>
-                    {(invoice.lblDueDate !== "" || invoice.dueDate !== "") && ": "}
+                      {invoice.lblDueDate ?? "DUE DATE:"}
+                    </span>{" "}
                     <b>{invoice.dueDate ? fmtDate(invoice.dueDate) : "—"}</b>
                   </div>
                 )}
-                {(invoice.lblPoNo || invoice.poNo) && (
+                {(invoice.lblPoNo !== "" || invoice.poNo !== "") && (
                   <div>
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblPoNo")}>
-                      {invoice.lblPoNo ?? "PO / REF NO"}
-                    </span>:{" "}
+                      {invoice.lblPoNo ?? "PO / REF NO:"}
+                    </span>{" "}
                     <b contentEditable suppressContentEditableWarning onBlur={handleEdit("poNo")}>
                       {invoice.poNo || "—"}
                     </b>
@@ -91,9 +88,8 @@ export default function InvoicePreview({
                 {(invoice.lblClient !== "" || invoice.clName !== "") && (
                   <div>
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblClient")}>
-                      {invoice.lblClient ?? "CLIENT"}
-                    </span>
-                    {(invoice.lblClient !== "" || invoice.clName !== "") && ": "}
+                      {invoice.lblClient ?? "CLIENT:"}
+                    </span>{" "}
                     <b contentEditable suppressContentEditableWarning onBlur={handleEdit("clName")}>
                       {invoice.clName || "—"}
                     </b>
