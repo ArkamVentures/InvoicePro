@@ -7,9 +7,21 @@ import InvoiceForm from "./components/InvoiceForm";
 import InvoicePreview from "./components/InvoicePreview";
 import SavedInvoicesModal from "./components/SavedInvoicesModal";
 
+const TEMPLATE_STORAGE_KEY = "invoicepro_custom_template";
+
 export default function App() {
   const [session, setSession] = useState(undefined); // undefined = not checked yet, null = signed out
-  const [invoice, setInvoice] = useState(defaultInvoice());
+  const [invoice, setInvoice] = useState(() => {
+    const saved = localStorage.getItem(TEMPLATE_STORAGE_KEY);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // fallback
+      }
+    }
+    return defaultInvoice("general");
+  });
   const [currentId, setCurrentId] = useState(null);
   const [saving, setSaving] = useState(false);
   const [showLoad, setShowLoad] = useState(false);
@@ -26,7 +38,7 @@ export default function App() {
 
   function flashToast(msg) {
     setToast(msg);
-    setTimeout(() => setToast(null), 1800);
+    setTimeout(() => setToast(null), 2200);
   }
 
   function onField(field, value) {
@@ -35,24 +47,54 @@ export default function App() {
 
   function onItemField(idx, field, value) {
     setInvoice((prev) => {
-      const items = prev.items.slice();
+      const items = (prev.items || []).slice();
       items[idx] = { ...items[idx], [field]: value };
       return { ...prev, items };
     });
   }
 
   function onAddItem(item) {
-    setInvoice((prev) => ({ ...prev, items: [...prev.items, item] }));
+    setInvoice((prev) => ({ ...prev, items: [...(prev.items || []), item] }));
   }
 
   function onRemoveItem(idx) {
-    setInvoice((prev) => ({ ...prev, items: prev.items.filter((_, i) => i !== idx) }));
+    setInvoice((prev) => ({ ...prev, items: (prev.items || []).filter((_, i) => i !== idx) }));
+  }
+
+  function onApplyPreset(bizType) {
+    setInvoice(defaultInvoice(bizType));
+    setCurrentId(null);
+    flashToast(`Loaded ${bizType} preset!`);
+  }
+
+  function onSaveTemplate() {
+    try {
+      localStorage.setItem(TEMPLATE_STORAGE_KEY, JSON.stringify(invoice));
+      flashToast("Saved as default template!");
+    } catch (e) {
+      flashToast("Failed to save template");
+    }
+  }
+
+  function onLoadTemplate() {
+    const saved = localStorage.getItem(TEMPLATE_STORAGE_KEY);
+    if (!saved) {
+      flashToast("No saved custom template found");
+      return;
+    }
+    try {
+      setInvoice(JSON.parse(saved));
+      setCurrentId(null);
+      flashToast("Loaded custom template!");
+    } catch (e) {
+      flashToast("Could not load template");
+    }
   }
 
   function onNew() {
-    setInvoice(defaultInvoice());
+    setInvoice(defaultInvoice(invoice.bizType || "general"));
     setCurrentId(null);
-    flashToast("New invoice");
+    flashToast("New blank invoice");
   }
 
   async function onSave() {
@@ -60,7 +102,7 @@ export default function App() {
     try {
       const id = await invoices.saveInvoice(currentId, invoice);
       setCurrentId(id);
-      flashToast("Invoice saved");
+      flashToast("Invoice saved to cloud");
     } catch (err) {
       console.error(err);
       flashToast(err.message || "Save failed");
@@ -133,6 +175,9 @@ export default function App() {
             onSave={onSave}
             onOpenLoad={onOpenLoad}
             onNew={onNew}
+            onApplyPreset={onApplyPreset}
+            onSaveTemplate={onSaveTemplate}
+            onLoadTemplate={onLoadTemplate}
             saving={saving}
           />
         </div>
@@ -153,3 +198,4 @@ export default function App() {
     </>
   );
 }
+

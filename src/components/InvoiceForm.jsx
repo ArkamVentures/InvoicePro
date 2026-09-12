@@ -1,4 +1,4 @@
-import { UNITS, emptyItem } from "../lib/calculations";
+import { UNITS, BUSINESS_TYPES, emptyItem } from "../lib/calculations";
 
 export default function InvoiceForm({
   invoice,
@@ -10,6 +10,9 @@ export default function InvoiceForm({
   onSave,
   onOpenLoad,
   onNew,
+  onApplyPreset,
+  onSaveTemplate,
+  onLoadTemplate,
   saving,
 }) {
   const set = (field) => (e) => onField(field, e.target.value);
@@ -17,64 +20,103 @@ export default function InvoiceForm({
   return (
     <div className="panel" id="panel">
       <div className="brand"><div className="mark"></div><h1>InvoicePro</h1></div>
-      <div className="brand-sub">Aluminium Fabrication Billing</div>
+      <div className="brand-sub">Universal Business Billing &amp; Template Generator</div>
 
       <fieldset>
-        <legend>Your Company</legend>
-        <label>Company Name</label>
-        <input value={invoice.coName} onChange={set("coName")} />
-        <label>Address</label>
-        <textarea value={invoice.coAddr} onChange={set("coAddr")} />
-        <div className="row2">
-          <div><label>Phone</label><input value={invoice.coPhone} onChange={set("coPhone")} /></div>
-          <div><label>Email</label><input value={invoice.coEmail} onChange={set("coEmail")} /></div>
-        </div>
-        <div className="row2">
-          <div><label>GSTIN</label><input value={invoice.coGst} onChange={set("coGst")} /></div>
-          <div><label>Since (year)</label><input value={invoice.sinceYear} onChange={set("sinceYear")} /></div>
+        <legend>Business Preset</legend>
+        <label>Select Business Industry / Category</label>
+        <select
+          value={invoice.bizType || "general"}
+          onChange={(e) => onApplyPreset(e.target.value)}
+        >
+          {BUSINESS_TYPES.map((bt) => (
+            <option key={bt.id} value={bt.id}>
+              {bt.label}
+            </option>
+          ))}
+        </select>
+        <div className="hint" style={{ marginTop: 6 }}>
+          Selecting a business preset loads sample invoice defaults for that industry.
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Bill To</legend>
-        <label>Client / Site Name</label>
-        <input value={invoice.clName} onChange={set("clName")} />
-        <label>Client Address</label>
-        <textarea value={invoice.clAddr} onChange={set("clAddr")} />
+        <legend>Your Company / Business</legend>
+        <label>Company / Business Name</label>
+        <input value={invoice.coName || ""} onChange={set("coName")} placeholder="e.g. Apex Enterprises" />
+        
         <div className="row2">
-          <div><label>Client GSTIN</label><input value={invoice.clGst} onChange={set("clGst")} /></div>
-          <div><label>Contact</label><input value={invoice.clPhone} onChange={set("clPhone")} /></div>
+          <div>
+            <label>Business Tagline / Subtitle</label>
+            <input value={invoice.coTagline || ""} onChange={set("coTagline")} placeholder="e.g. Consulting & Trading" />
+          </div>
+          <div>
+            <label>Currency Symbol</label>
+            <select value={invoice.currency || "₹"} onChange={set("currency")}>
+              <option value="₹">₹ (INR)</option>
+              <option value="$">$ (USD)</option>
+              <option value="€">€ (EUR)</option>
+              <option value="£">£ (GBP)</option>
+              <option value="AED ">AED</option>
+              <option value="SAR ">SAR</option>
+              <option value="$ ">$ (AUD/CAD)</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Address</label>
+        <textarea value={invoice.coAddr || ""} onChange={set("coAddr")} placeholder="Full company address..." />
+        <div className="row2">
+          <div><label>Phone</label><input value={invoice.coPhone || ""} onChange={set("coPhone")} /></div>
+          <div><label>Email</label><input value={invoice.coEmail || ""} onChange={set("coEmail")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>GSTIN / Tax ID</label><input value={invoice.coGst || ""} onChange={set("coGst")} /></div>
+          <div><label>Since (Year)</label><input value={invoice.sinceYear || ""} onChange={set("sinceYear")} /></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Bill To (Client / Customer)</legend>
+        <label>Client / Company Name</label>
+        <input value={invoice.clName || ""} onChange={set("clName")} placeholder="Client name..." />
+        <label>Client Address</label>
+        <textarea value={invoice.clAddr || ""} onChange={set("clAddr")} placeholder="Client address..." />
+        <div className="row2">
+          <div><label>Client GSTIN / Tax ID</label><input value={invoice.clGst || ""} onChange={set("clGst")} /></div>
+          <div><label>Client Contact</label><input value={invoice.clPhone || ""} onChange={set("clPhone")} /></div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Invoice Details</legend>
         <div className="row2">
-          <div><label>Invoice No.</label><input value={invoice.invNo} onChange={set("invNo")} /></div>
-          <div><label>Customer ID</label><input value={invoice.custId} onChange={set("custId")} /></div>
+          <div><label>Invoice No.</label><input value={invoice.invNo || ""} onChange={set("invNo")} /></div>
+          <div><label>Customer ID / Code</label><input value={invoice.custId || ""} onChange={set("custId")} /></div>
         </div>
-        <div><label>PO / Ref No.</label><input value={invoice.poNo} onChange={set("poNo")} /></div>
+        <div><label>PO / Reference No.</label><input value={invoice.poNo || ""} onChange={set("poNo")} /></div>
         <div className="row2">
-          <div><label>Invoice Date</label><input type="date" value={invoice.invDate} onChange={set("invDate")} /></div>
-          <div><label>Due Date</label><input type="date" value={invoice.dueDate} onChange={set("dueDate")} /></div>
+          <div><label>Invoice Date</label><input type="date" value={invoice.invDate || ""} onChange={set("invDate")} /></div>
+          <div><label>Due Date</label><input type="date" value={invoice.dueDate || ""} onChange={set("dueDate")} /></div>
         </div>
         <div className="row2">
-          <div><label>GST Rate (%)</label><input type="number" min="0" step="0.5" value={invoice.gstRate} onChange={set("gstRate")} /></div>
-          <div><label>Discount (%)</label><input type="number" min="0" step="0.5" value={invoice.discRate} onChange={set("discRate")} /></div>
+          <div><label>GST / Tax Rate (%)</label><input type="number" min="0" step="0.5" value={invoice.gstRate ?? 0} onChange={set("gstRate")} /></div>
+          <div><label>Discount (%)</label><input type="number" min="0" step="0.5" value={invoice.discRate ?? 0} onChange={set("discRate")} /></div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Line Items</legend>
         <div className="items-list">
-          {invoice.items.map((it, idx) => (
+          {(invoice.items || []).map((it, idx) => (
             <div className="item-card" key={idx}>
               <button type="button" className="del" title="Remove" onClick={() => onRemoveItem(idx)}>✕</button>
-              <label>Description</label>
+              <label>Item / Service Description</label>
               <textarea
                 style={{ minHeight: 36 }}
-                value={it.desc}
+                value={it.desc || ""}
                 onChange={(e) => onItemField(idx, "desc", e.target.value)}
+                placeholder="Product or service details..."
               />
               <div className="item-grid">
                 <div>
@@ -82,24 +124,24 @@ export default function InvoiceForm({
                   <input
                     type="number"
                     step="0.01"
-                    value={it.qty}
+                    value={it.qty ?? 0}
                     onChange={(e) => onItemField(idx, "qty", parseFloat(e.target.value) || 0)}
                   />
                 </div>
                 <div>
                   <label>Unit</label>
-                  <select value={it.unit} onChange={(e) => onItemField(idx, "unit", e.target.value)}>
+                  <select value={it.unit || "nos"} onChange={(e) => onItemField(idx, "unit", e.target.value)}>
                     {UNITS.map((u) => (
                       <option key={u} value={u}>{u}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label>Rate (₹)</label>
+                  <label>Rate ({invoice.currency || "₹"})</label>
                   <input
                     type="number"
                     step="0.01"
-                    value={it.rate}
+                    value={it.rate ?? 0}
                     onChange={(e) => onItemField(idx, "rate", parseFloat(e.target.value) || 0)}
                   />
                 </div>
@@ -108,33 +150,49 @@ export default function InvoiceForm({
           ))}
         </div>
         <button className="btn btn-add" type="button" onClick={() => onAddItem(emptyItem())}>
-          + Add fabrication item
+          + Add line item
         </button>
-        <div className="hint">Rate is per unit (sqft / rft / kg / nos, as chosen per item). Amount is calculated automatically.</div>
+        <div className="hint">Amount is calculated automatically as Qty × Rate.</div>
       </fieldset>
 
       <fieldset>
-        <legend>Notes, Terms &amp; Bank Details</legend>
-        <label>Notes</label>
-        <textarea value={invoice.notes} onChange={set("notes")} />
+        <legend>Notes, Terms &amp; Payment Details</legend>
+        <label>Invoice Notes</label>
+        <textarea value={invoice.notes || ""} onChange={set("notes")} placeholder="Thank you for your business..." />
         <label>Payment Terms</label>
-        <textarea value={invoice.terms} onChange={set("terms")} />
-        <label>Bank Name</label>
-        <input value={invoice.bankName} onChange={set("bankName")} />
+        <textarea value={invoice.terms || ""} onChange={set("terms")} placeholder="Payment due within 15 days..." />
+        <label>Bank / Payment Method Name</label>
+        <input value={invoice.bankName || ""} onChange={set("bankName")} placeholder="e.g. HDFC Bank / UPI / PayPal" />
         <div className="row2">
-          <div><label>Account No.</label><input value={invoice.bankAcc} onChange={set("bankAcc")} /></div>
-          <div><label>IFSC</label><input value={invoice.bankIfsc} onChange={set("bankIfsc")} /></div>
+          <div><label>Account / Details</label><input value={invoice.bankAcc || ""} onChange={set("bankAcc")} /></div>
+          <div><label>IFSC / SWIFT / Code</label><input value={invoice.bankIfsc || ""} onChange={set("bankIfsc")} /></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>My Custom Templates</legend>
+        <div className="template-actions">
+          <button className="btn btn-ghost" type="button" onClick={onSaveTemplate}>
+            ⭐ Save as Default Template
+          </button>
+          <button className="btn btn-ghost" type="button" onClick={onLoadTemplate}>
+            📂 Load Default Template
+          </button>
+        </div>
+        <div className="hint" style={{ marginTop: 6 }}>
+          Save your business details & layout preferences locally so you can reuse your custom template anytime for free!
         </div>
       </fieldset>
 
       <div className="actions">
-        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Save as PDF</button>
+        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Export PDF</button>
         <button className="btn btn-ghost" type="button" onClick={onSave} disabled={saving}>
-          {saving ? "Saving…" : "Save invoice"}
+          {saving ? "Saving…" : "Save to Cloud"}
         </button>
         <button className="btn btn-ghost" type="button" onClick={onOpenLoad}>Load saved invoices</button>
-        <button className="btn btn-ghost" type="button" onClick={onNew}>New invoice</button>
+        <button className="btn btn-ghost" type="button" onClick={onNew}>New blank invoice</button>
       </div>
     </div>
   );
 }
+

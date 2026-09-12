@@ -35,7 +35,7 @@ export default function Auth() {
     <div className="auth-screen">
       <div className="auth-card">
         <div className="brand"><div className="mark"></div><h1>InvoicePro</h1></div>
-        <div className="brand-sub">Aluminium Fabrication Billing</div>
+        <div className="brand-sub">Universal Business Billing &amp; Invoicing</div>
 
         <h2 className="auth-title">{mode === "signin" ? "Sign in" : "Create an account"}</h2>
 
