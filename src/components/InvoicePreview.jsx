@@ -113,13 +113,6 @@ export default function InvoicePreview({
             </div>
 
             <div className="items-wrap">
-              <svg className="items-watermark" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="10" width="26" height="280" rx="4" fill="#2f8a63" opacity="0.12" />
-                <rect x="56" y="40" width="18" height="250" rx="4" fill="#2f8a63" opacity="0.08" />
-                <rect x="84" y="70" width="30" height="220" rx="5" fill="#2f8a63" opacity="0.14" />
-                <rect x="124" y="20" width="16" height="270" rx="4" fill="#2f8a63" opacity="0.08" />
-                <rect x="150" y="90" width="22" height="200" rx="4" fill="#2f8a63" opacity="0.10" />
-              </svg>
               <table className="items">
                 <thead>
                   <tr>
