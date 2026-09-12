@@ -27,6 +27,8 @@ export default function App() {
   const [showLoad, setShowLoad] = useState(false);
   const [toast, setToast] = useState(null);
 
+  const [isGuest, setIsGuest] = useState(false);
+
   const userId = session?.user?.id;
   const invoices = useInvoices(userId);
 
@@ -98,6 +100,10 @@ export default function App() {
   }
 
   async function onSave() {
+    if (isGuest || !userId) {
+      onSaveTemplate();
+      return;
+    }
     setSaving(true);
     try {
       const id = await invoices.saveInvoice(currentId, invoice);
@@ -112,6 +118,10 @@ export default function App() {
   }
 
   async function onOpenLoad() {
+    if (isGuest || !userId) {
+      onLoadTemplate();
+      return;
+    }
     setShowLoad(true);
     await invoices.refreshList();
   }
@@ -146,6 +156,7 @@ export default function App() {
   }
 
   async function signOut() {
+    setIsGuest(false);
     await supabase.auth.signOut();
   }
 
@@ -153,8 +164,8 @@ export default function App() {
     return <div className="boot-screen">Loading…</div>;
   }
 
-  if (!session) {
-    return <Auth />;
+  if (!session && !isGuest) {
+    return <Auth onGuestMode={() => setIsGuest(true)} />;
   }
 
   return (
@@ -162,9 +173,12 @@ export default function App() {
       <div className="app">
         <div className="panel-wrap">
           <div className="session-bar">
-            <span className="session-email">{session.user.email}</span>
-            <button className="session-signout" onClick={signOut}>Sign out</button>
+            <span className="session-email">{session ? session.user.email : "Guest Mode (Free offline builder)"}</span>
+            <button className="session-signout" onClick={signOut}>
+              {session ? "Sign out" : "Sign in / Exit guest"}
+            </button>
           </div>
+
           <InvoiceForm
             invoice={invoice}
             onField={onField}

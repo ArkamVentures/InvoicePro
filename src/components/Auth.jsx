@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
 
-export default function Auth() {
+export default function Auth({ onGuestMode }) {
   const [mode, setMode] = useState("signin"); // "signin" | "signup"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,6 +68,15 @@ export default function Auth() {
 
         <button
           type="button"
+          className="btn btn-ghost"
+          style={{ marginTop: 14, width: "100%" }}
+          onClick={onGuestMode}
+        >
+          ⚡ Continue as Guest (No Login Required)
+        </button>
+
+        <button
+          type="button"
           className="auth-switch"
           onClick={() => {
             setMode(mode === "signin" ? "signup" : "signin");
@@ -81,3 +90,4 @@ export default function Auth() {
     </div>
   );
 }
+
