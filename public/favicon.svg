@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#1e2b25"/>
+  <!-- Document body -->
+  <rect x="14" y="10" width="30" height="38" rx="3" fill="#ffffff"/>
+  <!-- Fold corner -->
+  <polygon points="44,10 44,20 54,20" fill="#cdd6d1"/>
+  <!-- Document with fold -->
+  <path d="M14 10 h24 l10 10 v28 a3 3 0 0 1-3 3 H17 a3 3 0 0 1-3-3 V13 a3 3 0 0 1 3-3z" fill="#ffffff"/>
+  <!-- Lines on document -->
+  <rect x="20" y="26" width="18" height="2.5" rx="1" fill="#cdd6d1"/>
+  <rect x="20" y="31" width="14" height="2.5" rx="1" fill="#cdd6d1"/>
+  <rect x="20" y="36" width="16" height="2.5" rx="1" fill="#cdd6d1"/>
+  <!-- Green checkmark badge -->
+  <circle cx="46" cy="46" r="12" fill="#2f8a63"/>
+  <polyline points="40,46 44,50 52,41" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
