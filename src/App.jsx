@@ -12,6 +12,7 @@ const DRAFT_STORAGE_KEY = "invoicepro_active_draft";
 
 export default function App() {
   const [session, setSession] = useState(undefined); // undefined = not checked yet, null = signed out
+  const [activeTab, setActiveTab] = useState("edit"); // mobile view tab: 'edit' or 'preview'
   const [leftWidth, setLeftWidth] = useState(() => {
     const saved = localStorage.getItem("invoicepro_panel_width");
     return saved ? Math.max(300, Math.min(700, Number(saved))) : 420;
@@ -221,8 +222,23 @@ export default function App() {
 
   return (
     <>
+      <div className="mobile-tab-bar">
+        <button
+          className={`mobile-tab-btn ${activeTab === "edit" ? "active" : ""}`}
+          onClick={() => setActiveTab("edit")}
+        >
+          📝 Edit Invoice Form
+        </button>
+        <button
+          className={`mobile-tab-btn ${activeTab === "preview" ? "active" : ""}`}
+          onClick={() => setActiveTab("preview")}
+        >
+          👁️ Live Invoice Preview
+        </button>
+      </div>
+
       <div
-        className={`app ${isResizing ? "resizing" : ""}`}
+        className={`app ${isResizing ? "resizing" : ""} mobile-tab-${activeTab}`}
         style={{ gridTemplateColumns: `${leftWidth}px 8px 1fr` }}
       >
         <div className="panel-wrap">
