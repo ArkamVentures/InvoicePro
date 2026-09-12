@@ -13,7 +13,7 @@
   --wash:#eef8f3;
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:'Inter',sans-serif;background:var(--graphite);color:#1c2023;}
+html, body{margin:0;padding:0;height:100vh;overflow:hidden;font-family:'Inter',sans-serif;background:var(--graphite);color:#1c2023;}
 h1,h2,h3,.label,.mono-label{font-family:'Poppins',sans-serif;}
 ::selection{background:var(--safety);color:#fff;}
 
