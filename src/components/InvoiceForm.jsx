@@ -182,12 +182,20 @@ export default function InvoiceForm({
           <div><label>Rate Column Header</label><input value={invoice.lblRate || "Rate"} onChange={set("lblRate")} /></div>
         </div>
         <div className="row2">
+          <div><label>Total Column Header</label><input value={invoice.lblTotal || "Total"} onChange={set("lblTotal")} /></div>
+          <div><label>Signoff Text</label><input value={invoice.lblSignoff || "Authorised Signatory"} onChange={set("lblSignoff")} /></div>
+        </div>
+        <div className="row2">
           <div><label>Payment Terms Title</label><input value={invoice.lblPayTerms || "PAYMENT TERMS"} onChange={set("lblPayTerms")} /></div>
           <div><label>Notes Title</label><input value={invoice.lblNotes || "NOTES"} onChange={set("lblNotes")} /></div>
         </div>
         <div className="row2">
           <div><label>Bank Details Title</label><input value={invoice.lblBankDetails || "BANK / PAYMENT DETAILS"} onChange={set("lblBankDetails")} /></div>
-          <div><label>Signoff Text</label><input value={invoice.lblSignoff || "Authorised Signatory"} onChange={set("lblSignoff")} /></div>
+          <div><label>Bank / Account Label</label><input value={invoice.lblBankName || "Bank/Account"} onChange={set("lblBankName")} /></div>
+        </div>
+        <div className="row2">
+          <div><label>Account No. Label</label><input value={invoice.lblBankAcc || "A/C No."} onChange={set("lblBankAcc")} /></div>
+          <div><label>IFSC / Code Label</label><input value={invoice.lblBankIfsc || "IFSC / Code"} onChange={set("lblBankIfsc")} /></div>
         </div>
       </fieldset>
 
