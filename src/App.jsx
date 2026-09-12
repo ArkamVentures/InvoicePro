@@ -11,6 +11,12 @@ const TEMPLATE_STORAGE_KEY = "invoicepro_custom_template";
 
 export default function App() {
   const [session, setSession] = useState(undefined); // undefined = not checked yet, null = signed out
+  const [leftWidth, setLeftWidth] = useState(() => {
+    const saved = localStorage.getItem("invoicepro_panel_width");
+    return saved ? Math.max(300, Math.min(700, Number(saved))) : 420;
+  });
+  const [isResizing, setIsResizing] = useState(false);
+
   const [invoice, setInvoice] = useState(() => {
     const saved = localStorage.getItem(TEMPLATE_STORAGE_KEY);
     if (saved) {
@@ -37,6 +43,32 @@ export default function App() {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
     return () => sub.subscription.unsubscribe();
   }, []);
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    setIsResizing(true);
+  };
+
+  useEffect(() => {
+    if (!isResizing) return;
+
+    const handleMouseMove = (e) => {
+      const newWidth = Math.max(300, Math.min(850, e.clientX));
+      setLeftWidth(newWidth);
+      localStorage.setItem("invoicepro_panel_width", newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizing]);
 
   function flashToast(msg) {
     setToast(msg);
@@ -170,7 +202,10 @@ export default function App() {
 
   return (
     <>
-      <div className="app">
+      <div
+        className={`app ${isResizing ? "resizing" : ""}`}
+        style={{ gridTemplateColumns: `${leftWidth}px 8px 1fr` }}
+      >
         <div className="panel-wrap">
           <div className="session-bar">
             <span className="session-email">{session ? session.user.email : "Guest Mode (Free offline builder)"}</span>
@@ -195,6 +230,15 @@ export default function App() {
             saving={saving}
           />
         </div>
+
+        <div
+          className="resizer-handle"
+          onMouseDown={handleMouseDown}
+          title="Drag to resize panels"
+        >
+          <div className="resizer-bar" />
+        </div>
+
         <InvoicePreview invoice={invoice} />
       </div>
 
