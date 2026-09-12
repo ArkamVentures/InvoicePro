@@ -14,14 +14,6 @@ export default function InvoicePreview({
 
   return (
     <div className="stage">
-      <div className="preview-toolbar">
-        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Export PDF</button>
-        <button className="btn btn-ghost" type="button" onClick={onSave} disabled={saving}>
-          {saving ? "Saving…" : "Save to Cloud"}
-        </button>
-        <button className="btn btn-ghost" type="button" onClick={onOpenLoad}>Load saved invoices</button>
-        <button className="btn btn-ghost" type="button" onClick={onNew}>New blank invoice</button>
-      </div>
       <div className="sheet" id="sheet">
         <div className="sheet-inner">
           <div className="doc-head">
@@ -134,6 +126,14 @@ export default function InvoicePreview({
           <span>{invoice.coName || "InvoicePro"}</span>
           {invoice.sinceYear && <span className="since">EST. <span>{invoice.sinceYear}</span></span>}
         </div>
+      </div>
+      <div className="preview-toolbar" style={{ marginTop: 24 }}>
+        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Export PDF</button>
+        <button className="btn btn-ghost" type="button" onClick={onSave} disabled={saving}>
+          {saving ? "Saving…" : "Save to Cloud"}
+        </button>
+        <button className="btn btn-ghost" type="button" onClick={onOpenLoad}>Load saved invoices</button>
+        <button className="btn btn-ghost" type="button" onClick={onNew}>New blank invoice</button>
       </div>
     </div>
   );
