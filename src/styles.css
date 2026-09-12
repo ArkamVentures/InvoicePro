@@ -149,6 +149,22 @@ table.items tbody td.num{text-align:right;font-weight:700;}
   text-decoration:underline;padding:0;font-family:'Inter';}
 .auth-switch:hover{color:var(--safety);}
 
+.btn-google{
+  width:100%;background:#ffffff;color:#3c4043;border:1px solid #dadce0;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Google Sans',Roboto,Arial,sans-serif;font-weight:500;font-size:14px;
+  padding:10px 16px;border-radius:4px;cursor:pointer;transition:background-color .2s;
+}
+.btn-google:hover{background:#f8f9fa;border-color:#d2e3fc;}
+.auth-divider{
+  display:flex;align-items:center;text-align:center;margin:18px 0 14px;color:var(--steel-light);font-size:11px;
+}
+.auth-divider::before,.auth-divider::after{
+  content:'';flex:1;border-bottom:1px solid #3a4045;
+}
+.auth-divider span{padding:0 10px;}
+
+
 /* ---- Saved invoices modal ---- */
 .modal-overlay{position:fixed;inset:0;background:rgba(20,25,22,.6);display:flex;align-items:center;justify-content:center;z-index:70;padding:20px;}
 .modal-card{width:100%;max-width:440px;max-height:80vh;overflow-y:auto;background:#23282c;border:1px solid #33393e;
