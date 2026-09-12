@@ -53,8 +53,7 @@ export default function App() {
     if (!isResizing) return;
 
     const handleMouseMove = (e) => {
-      const windowWidth = window.innerWidth;
-      const newWidth = Math.max(300, Math.min(850, windowWidth - e.clientX));
+      const newWidth = Math.max(300, Math.min(850, e.clientX));
       setLeftWidth(newWidth);
       localStorage.setItem("invoicepro_panel_width", newWidth);
     };
@@ -205,18 +204,8 @@ export default function App() {
     <>
       <div
         className={`app ${isResizing ? "resizing" : ""}`}
-        style={{ gridTemplateColumns: `1fr 8px ${leftWidth}px` }}
+        style={{ gridTemplateColumns: `${leftWidth}px 8px 1fr` }}
       >
-        <InvoicePreview invoice={invoice} />
-
-        <div
-          className="resizer-handle"
-          onMouseDown={handleMouseDown}
-          title="Drag to resize panels"
-        >
-          <div className="resizer-bar" />
-        </div>
-
         <div className="panel-wrap">
           <div className="session-bar">
             <span className="session-email">{session ? session.user.email : "Guest Mode (Free offline builder)"}</span>
@@ -241,6 +230,16 @@ export default function App() {
             saving={saving}
           />
         </div>
+
+        <div
+          className="resizer-handle"
+          onMouseDown={handleMouseDown}
+          title="Drag to resize panels"
+        >
+          <div className="resizer-bar" />
+        </div>
+
+        <InvoicePreview invoice={invoice} />
       </div>
 
       {showLoad && (
