@@ -8,6 +8,7 @@ import InvoicePreview from "./components/InvoicePreview";
 import SavedInvoicesModal from "./components/SavedInvoicesModal";
 
 const TEMPLATE_STORAGE_KEY = "invoicepro_custom_template";
+const DRAFT_STORAGE_KEY = "invoicepro_active_draft";
 
 export default function App() {
   const [session, setSession] = useState(undefined); // undefined = not checked yet, null = signed out
@@ -18,13 +19,17 @@ export default function App() {
   const [isResizing, setIsResizing] = useState(false);
 
   const [invoice, setInvoice] = useState(() => {
-    const saved = localStorage.getItem(TEMPLATE_STORAGE_KEY);
-    if (saved) {
+    const activeDraft = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (activeDraft) {
       try {
-        return JSON.parse(saved);
-      } catch (e) {
-        // fallback
-      }
+        return JSON.parse(activeDraft);
+      } catch (e) {}
+    }
+    const savedTemplate = localStorage.getItem(TEMPLATE_STORAGE_KEY);
+    if (savedTemplate) {
+      try {
+        return JSON.parse(savedTemplate);
+      } catch (e) {}
     }
     return defaultInvoice("general");
   });
@@ -37,6 +42,13 @@ export default function App() {
 
   const userId = session?.user?.id;
   const invoices = useInvoices(userId);
+
+  // Auto-save every keypress / field edit locally instantly
+  useEffect(() => {
+    if (invoice) {
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(invoice));
+    }
+  }, [invoice]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
