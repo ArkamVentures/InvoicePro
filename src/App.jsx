@@ -22,15 +22,22 @@ export default function App() {
     const activeDraft = localStorage.getItem(DRAFT_STORAGE_KEY);
     if (activeDraft) {
       try {
-        return JSON.parse(activeDraft);
+        const parsed = JSON.parse(activeDraft);
+        if (parsed && parsed.coName !== "Apex Solutions & Services") {
+          return parsed;
+        }
       } catch (e) {}
     }
     const savedTemplate = localStorage.getItem(TEMPLATE_STORAGE_KEY);
     if (savedTemplate) {
       try {
-        return JSON.parse(savedTemplate);
+        const parsedT = JSON.parse(savedTemplate);
+        if (parsedT && parsedT.coName !== "Apex Solutions & Services") {
+          return parsedT;
+        }
       } catch (e) {}
     }
+    localStorage.removeItem(DRAFT_STORAGE_KEY);
     return defaultInvoice("general");
   });
   const [currentId, setCurrentId] = useState(null);
