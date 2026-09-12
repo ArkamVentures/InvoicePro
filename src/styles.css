@@ -113,7 +113,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--safety);outline-
 .toast.show{opacity:1;}
 
 /* ---- Right: invoice preview ---- */
-.stage{background:#e5e3de;padding:30px 32px 50px;display:flex;flex-direction:column;align-items:center;height:100vh;overflow-y:scroll;}
+.stage{background:#e5e3de;padding:30px 32px 50px;height:100vh;overflow-y:scroll;}
+.stage-inner{display:flex;flex-direction:column;align-items:center;width:100%;max-width:800px;margin:0 auto;}
 .stage::-webkit-scrollbar{width:8px;}
 .stage::-webkit-scrollbar-track{background:#d5d3ce;}
 .stage::-webkit-scrollbar-thumb{background:#a5a39e;border-radius:4px;}
