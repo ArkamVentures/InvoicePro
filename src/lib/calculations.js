@@ -68,7 +68,7 @@ export function emptyItem() {
 export function defaultInvoice(bizType = "general") {
   const base = {
     bizType: bizType,
-    currency: "₹",
+    currency: "Rs. ",
     coName: "Apex Solutions & Services",
     coTagline: "Professional Enterprise Solutions",
     coAddr: "Suite 402, Business Bay Tower\nMG Road, Bengaluru, Karnataka 560001",

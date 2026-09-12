@@ -34,14 +34,26 @@ export default function InvoiceForm({
           </div>
           <div>
             <label>Currency Symbol</label>
-            <select value={invoice.currency || "₹"} onChange={set("currency")}>
-              <option value="₹">₹ (INR)</option>
-              <option value="$">$ (USD)</option>
-              <option value="€">€ (EUR)</option>
-              <option value="£">£ (GBP)</option>
-              <option value="AED ">AED</option>
-              <option value="SAR ">SAR</option>
-              <option value="$ ">$ (AUD/CAD)</option>
+            <select value={invoice.currency || "Rs. "} onChange={set("currency")}>
+              <option value="Rs. ">Rs. (LKR - Sri Lankan Rupee)</option>
+              <option value="₹">₹ (INR - Indian Rupee)</option>
+              <option value="$">$ (USD - US Dollar)</option>
+              <option value="€">€ (EUR - Euro)</option>
+              <option value="£">£ (GBP - British Pound)</option>
+              <option value="AED ">AED (UAE Dirham)</option>
+              <option value="SAR ">SAR (Saudi Riyal)</option>
+              <option value="QAR ">QAR (Qatari Riyal)</option>
+              <option value="OMR ">OMR (Omani Rial)</option>
+              <option value="BHD ">BHD (Bahraini Dinar)</option>
+              <option value="KWD ">KWD (Kuwaiti Dinar)</option>
+              <option value="SGD ">SGD (Singapore Dollar)</option>
+              <option value="MYR ">MYR (Malaysian Ringgit)</option>
+              <option value="AUD ">A$ (Australian Dollar)</option>
+              <option value="CAD ">C$ (Canadian Dollar)</option>
+              <option value="CHF ">CHF (Swiss Franc)</option>
+              <option value="¥">¥ (JPY / CNY)</option>
+              <option value="৳">৳ (BDT - Bangladeshi Taka)</option>
+              <option value="₨">₨ (PKR - Pakistani Rupee)</option>
             </select>
           </div>
         </div>
