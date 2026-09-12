@@ -239,7 +239,14 @@ export default function App() {
           <div className="resizer-bar" />
         </div>
 
-        <InvoicePreview invoice={invoice} />
+        <InvoicePreview
+          invoice={invoice}
+          onPrint={onPrint}
+          onSave={onSave}
+          onOpenLoad={onOpenLoad}
+          onNew={onNew}
+          saving={saving}
+        />
       </div>
 
       {showLoad && (

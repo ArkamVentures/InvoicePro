@@ -194,14 +194,6 @@ export default function InvoiceForm({
         </div>
       </fieldset>
 
-      <div className="actions">
-        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Export PDF</button>
-        <button className="btn btn-ghost" type="button" onClick={onSave} disabled={saving}>
-          {saving ? "Saving…" : "Save to Cloud"}
-        </button>
-        <button className="btn btn-ghost" type="button" onClick={onOpenLoad}>Load saved invoices</button>
-        <button className="btn btn-ghost" type="button" onClick={onNew}>New blank invoice</button>
-      </div>
     </div>
   );
 }

@@ -1,12 +1,27 @@
 import { money, fmtDate, computeTotals } from "../lib/calculations";
 
-export default function InvoicePreview({ invoice }) {
+export default function InvoicePreview({
+  invoice,
+  onPrint,
+  onSave,
+  onOpenLoad,
+  onNew,
+  saving
+}) {
   const currencySymbol = invoice.currency || "₹";
   const totals = computeTotals(invoice.items, invoice.discRate, invoice.gstRate);
   const showGstRows = totals.gstRate > 0;
 
   return (
     <div className="stage">
+      <div className="preview-toolbar">
+        <button className="btn btn-primary" type="button" onClick={onPrint}>Print / Export PDF</button>
+        <button className="btn btn-ghost" type="button" onClick={onSave} disabled={saving}>
+          {saving ? "Saving…" : "Save to Cloud"}
+        </button>
+        <button className="btn btn-ghost" type="button" onClick={onOpenLoad}>Load saved invoices</button>
+        <button className="btn btn-ghost" type="button" onClick={onNew}>New blank invoice</button>
+      </div>
       <div className="sheet" id="sheet">
         <div className="sheet-inner">
           <div className="doc-head">
