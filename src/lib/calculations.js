@@ -66,36 +66,34 @@ export function emptyItem() {
 }
 
 export function defaultInvoice(bizType = "general") {
-  const base = {
+  return {
     bizType: bizType,
     currency: "Rs. ",
-    coName: "Apex Solutions & Services",
-    coTagline: "Professional Enterprise Solutions",
-    coAddr: "Suite 402, Business Bay Tower\nMG Road, Bengaluru, Karnataka 560001",
-    coPhone: "+91 98765 43210",
-    coEmail: "billing@apexsolutions.in",
-    coGst: "29ABCDE1234F1Z5",
-    sinceYear: "2018",
-    clName: "Acme Enterprises Ltd.",
-    clAddr: "7th Floor, Innovation Park\nWhitefield, Bengaluru, Karnataka 560066",
-    clGst: "29XYZAB5678G1Z2",
-    clPhone: "+91 99887 66554",
-    invNo: "INV-2026-001",
-    custId: "CUST-1042",
-    poNo: "PO-89210",
+    coName: "",
+    coTagline: "",
+    coAddr: "",
+    coPhone: "",
+    coEmail: "",
+    coGst: "",
+    sinceYear: "",
+    clName: "",
+    clAddr: "",
+    clGst: "",
+    clPhone: "",
+    invNo: "",
+    custId: "",
+    poNo: "",
     invDate: todayStr(0),
-    dueDate: todayStr(15),
-    gstRate: 18,
+    dueDate: "",
+    gstRate: 0,
     discRate: 0,
-    notes: "Thank you for your business. Please reach out to billing@apexsolutions.in for any queries.",
-    terms: "Payment due within 15 days of invoice date. 50% advance on confirmation where applicable.",
-    bankName: "HDFC Bank, MG Road Branch",
-    bankAcc: "50200012345678",
-    bankIfsc: "HDFC0001234",
+    notes: "",
+    terms: "",
+    bankName: "",
+    bankAcc: "",
+    bankIfsc: "",
     items: [
-      { desc: "Web Development & Maintenance", qty: 1, unit: "set", rate: 45000 },
-      { desc: "Cloud Infrastructure Setup", qty: 1, unit: "hrs", rate: 15000 },
-      { desc: "Annual Technical Support", qty: 12, unit: "nos", rate: 2500 },
+      { desc: "", qty: 1, unit: "nos", rate: 0 }
     ],
     // Customizable Field Labels
     lblInvTitle: "TAX INVOICE",
@@ -117,28 +115,5 @@ export function defaultInvoice(bizType = "general") {
     lblSignoff: "Authorised Signatory",
     lblFooterNotice: "This is a computer-generated invoice."
   };
-
-  if (bizType === "aluminium") {
-    return {
-      ...base,
-      coName: "Precision Aluminium Fabricators",
-      coTagline: "Aluminium Fabrication & Glazing",
-      coAddr: "Plot 14, Industrial Estate Road\nVadodara, Gujarat 390010",
-      coEmail: "billing@precisionalum.in",
-      coGst: "24AAECP1234F1Z5",
-      sinceYear: "1992",
-      clName: "Shreeji Constructions Pvt. Ltd.",
-      clAddr: "Site Office, Sarkhej-Gandhinagar Hwy\nAhmedabad, Gujarat 380054",
-      clGst: "24AAFCS5678G1Z2",
-      notes: "All aluminium sections powder-coated as per approved shade card. Thank you for your business.",
-      items: [
-        { desc: "4 x 4 45mm Casement window", qty: 3, unit: "nos", rate: 56000 },
-        { desc: "6 x 5 45mm Casement window", qty: 3, unit: "nos", rate: 105000 },
-        { desc: "100mm 5 x 5.5 Double door", qty: 1, unit: "nos", rate: 130000 },
-      ],
-    };
-  }
-
-  return base;
 }
 
