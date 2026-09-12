@@ -313,17 +313,17 @@ table.items tbody td.num{text-align:right;font-weight:700;white-space:nowrap;}
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-  .panel-wrap, .resizer-handle, .preview-toolbar, .toast, .modal-overlay, .session-bar {
+  .panel-wrap, .resizer-handle, .preview-toolbar, .mobile-tab-bar, .toast, .modal-overlay, .session-bar {
     display: none !important;
   }
-  .app {
+  .app, .app.mobile-tab-edit, .app.mobile-tab-preview {
     display: block !important;
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  .stage {
+  .stage, .app.mobile-tab-edit .stage, .app.mobile-tab-preview .stage {
     background: #fff !important;
     padding: 0 !important;
     margin: 0 !important;
