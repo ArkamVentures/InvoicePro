@@ -17,7 +17,7 @@ export function useInvoices(userId) {
     setError(null);
     const { data, error: err } = await supabase
       .from("invoices")
-      .select("id, inv_no, updated_at")
+      .select("id, inv_no, data, updated_at")
       .order("updated_at", { ascending: false });
     setLoading(false);
     if (err) {
@@ -30,9 +30,12 @@ export function useInvoices(userId) {
   const saveInvoice = useCallback(
     async (invoiceId, invoiceData) => {
       if (!userId) throw new Error("Not signed in");
+      const displayName = invoiceData.titleName
+        ? `${invoiceData.titleName} (${invoiceData.invNo || "No Inv#"})`
+        : (invoiceData.invNo || "Untitled");
       const payload = {
         user_id: userId,
-        inv_no: invoiceData.invNo || "Untitled",
+        inv_no: displayName,
         data: invoiceData,
         updated_at: new Date().toISOString(),
       };

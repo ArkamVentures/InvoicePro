@@ -84,7 +84,13 @@ export default function InvoiceForm({
 
       <fieldset>
         <legend>Invoice Details</legend>
-        <div className="row2">
+        <label>Invoice Title / Custom Name (For easy searching &amp; saving)</label>
+        <input
+          value={invoice.titleName || ""}
+          onChange={set("titleName")}
+          placeholder="e.g. Website Design Project / Monthly Retainer / John Doe Invoice"
+        />
+        <div className="row2" style={{ marginTop: 8 }}>
           <div><label>Invoice No.</label><input value={invoice.invNo || ""} onChange={set("invNo")} /></div>
           <div><label>Customer ID / Code</label><input value={invoice.custId || ""} onChange={set("custId")} /></div>
         </div>
