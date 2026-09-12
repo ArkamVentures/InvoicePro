@@ -260,6 +260,8 @@ export default function App() {
 
         <InvoicePreview
           invoice={invoice}
+          onField={onField}
+          onItemField={onItemField}
           onPrint={onPrint}
           onSave={onSave}
           onOpenLoad={onOpenLoad}
