@@ -83,7 +83,7 @@ export function defaultInvoice(bizType = "general") {
     invNo: "",
     custId: "",
     poNo: "",
-    invDate: todayStr(0),
+    invDate: "",
     dueDate: "",
     gstRate: 0,
     discRate: 0,
