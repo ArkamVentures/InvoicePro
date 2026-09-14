@@ -168,9 +168,10 @@ export default function InvoiceForm({
                 <div>
                   <label>Unit</label>
                   <select
-                    value={it.unit || "nos"}
+                    value={it.unit ?? "nos"}
                     onChange={(e) => onItemField(idx, "unit", e.target.value)}
                   >
+                    <option value="">(None)</option>
                     {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
                   </select>
                 </div>

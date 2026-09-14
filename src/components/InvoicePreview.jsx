@@ -175,7 +175,7 @@ export default function InvoicePreview({
                             if (onItemField) onItemField(i, "qty", val);
                           }}
                         >
-                          {String(it.qty ?? 0).padStart(2, "0")} <span style={{ fontSize: '0.85em', color: 'var(--steel)' }}>{it.unit || "nos"}</span>
+                          {String(it.qty ?? 0).padStart(2, "0")} <span style={{ fontSize: '0.85em', color: 'var(--steel)' }}>{it.unit ?? "nos"}</span>
                         </td>
                         <td
                           className="num"
