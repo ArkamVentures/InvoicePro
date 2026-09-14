@@ -24,7 +24,44 @@ export default function InvoiceForm({
 
       <fieldset>
         <legend>Your Company / Business</legend>
-        <label>Company / Business Name</label>
+        <div className="row2">
+          <div>
+            <label>Company Logo (Upload Image)</label>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ padding: "5px 8px" }}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = (evt) => onField("coLogo", evt.target.result);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </div>
+          <div>
+            <label>Logo Image URL (Or paste link)</label>
+            <input
+              value={invoice.coLogo || ""}
+              onChange={set("coLogo")}
+              placeholder="https://example.com/logo.png"
+            />
+          </div>
+        </div>
+        {invoice.coLogo && (
+          <button
+            type="button"
+            className="btn btn-ghost"
+            style={{ fontSize: 11, padding: "4px 8px", marginTop: 4, width: "auto" }}
+            onClick={() => onField("coLogo", "")}
+          >
+            🗑️ Remove Company Logo
+          </button>
+        )}
+        
+        <label style={{ marginTop: 10 }}>Company / Business Name</label>
         <input value={invoice.coName || ""} onChange={set("coName")} placeholder="e.g. Apex Enterprises" />
         
         <div className="row2">
