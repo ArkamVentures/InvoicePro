@@ -169,9 +169,13 @@ export default function InvoicePreview({
                           className="num"
                           contentEditable
                           suppressContentEditableWarning
-                          onBlur={(e) => onItemField && onItemField(i, "qty", parseFloat(e.currentTarget.innerText) || 0)}
+                          onBlur={(e) => {
+                            // Extract just the number from the string e.g. "01 nos" -> 1
+                            const val = parseFloat(e.currentTarget.innerText) || 0;
+                            if (onItemField) onItemField(i, "qty", val);
+                          }}
                         >
-                          {String(it.qty ?? 0).padStart(2, "0")}
+                          {String(it.qty ?? 0).padStart(2, "0")} <span style={{ fontSize: '0.85em', color: 'var(--steel)' }}>{it.unit || "nos"}</span>
                         </td>
                         <td
                           className="num"

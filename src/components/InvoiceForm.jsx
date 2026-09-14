@@ -155,7 +155,7 @@ export default function InvoiceForm({
                 onChange={(e) => onItemField(idx, "desc", e.target.value)}
                 placeholder="Product or service details..."
               />
-              <div className="row2" style={{ marginTop: 8 }}>
+              <div className="row3" style={{ marginTop: 8 }}>
                 <div>
                   <label>Qty</label>
                   <input
@@ -164,6 +164,15 @@ export default function InvoiceForm({
                     value={it.qty ?? 0}
                     onChange={(e) => onItemField(idx, "qty", parseFloat(e.target.value) || 0)}
                   />
+                </div>
+                <div>
+                  <label>Unit</label>
+                  <select
+                    value={it.unit || "nos"}
+                    onChange={(e) => onItemField(idx, "unit", e.target.value)}
+                  >
+                    {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
+                  </select>
                 </div>
                 <div>
                   <label>Rate ({invoice.currency || "Rs. "})</label>
