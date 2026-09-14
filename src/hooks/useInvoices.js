@@ -18,6 +18,7 @@ export function useInvoices(userId) {
     const { data, error: err } = await supabase
       .from("invoices")
       .select("id, inv_no, data, updated_at")
+      .eq("user_id", userId) // defense-in-depth: scope to current user even if RLS is bypassed
       .order("updated_at", { ascending: false });
     setLoading(false);
     if (err) {
@@ -45,6 +46,7 @@ export function useInvoices(userId) {
           .from("invoices")
           .update(payload)
           .eq("id", invoiceId)
+          .eq("user_id", userId) // defense-in-depth: can't overwrite another user's row
           .select("id")
           .single();
         if (err) throw err;
@@ -63,19 +65,26 @@ export function useInvoices(userId) {
   );
 
   const loadInvoice = useCallback(async (invoiceId) => {
+    if (!userId) throw new Error("Not signed in");
     const { data, error: err } = await supabase
       .from("invoices")
       .select("id, data")
       .eq("id", invoiceId)
+      .eq("user_id", userId) // defense-in-depth: prevent loading another user's invoice by ID
       .single();
     if (err) throw err;
     return data;
-  }, []);
+  }, [userId]);
 
   const deleteInvoice = useCallback(async (invoiceId) => {
-    const { error: err } = await supabase.from("invoices").delete().eq("id", invoiceId);
+    if (!userId) throw new Error("Not signed in");
+    const { error: err } = await supabase
+      .from("invoices")
+      .delete()
+      .eq("id", invoiceId)
+      .eq("user_id", userId); // defense-in-depth: prevent deleting another user's row by ID
     if (err) throw err;
-  }, []);
+  }, [userId]);
 
   return { list, loading, error, refreshList, saveInvoice, loadInvoice, deleteInvoice };
 }
