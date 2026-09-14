@@ -71,8 +71,14 @@ export default function InvoicePreview({
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblInvDate")}>
                       {invoice.lblInvDate ?? "DATE:"}
                     </span>{" "}
-                    <b contentEditable suppressContentEditableWarning onBlur={handleEdit("invDate")}>
-                      {invoice.invDate ? fmtDate(invoice.invDate) : "—"}
+                    <b>
+                      <input
+                        type="date"
+                        className="date-input-inline"
+                        value={invoice.invDate || ""}
+                        onChange={(e) => onField && onField("invDate", e.target.value)}
+                        title="Click to change invoice date"
+                      />
                     </b>
                   </div>
                 )}
@@ -81,7 +87,15 @@ export default function InvoicePreview({
                     <span contentEditable suppressContentEditableWarning onBlur={handleEdit("lblDueDate")}>
                       {invoice.lblDueDate ?? "DUE DATE:"}
                     </span>{" "}
-                    <b>{invoice.dueDate ? fmtDate(invoice.dueDate) : "—"}</b>
+                    <b>
+                      <input
+                        type="date"
+                        className="date-input-inline"
+                        value={invoice.dueDate || ""}
+                        onChange={(e) => onField && onField("dueDate", e.target.value)}
+                        title="Click to change due date"
+                      />
+                    </b>
                   </div>
                 )}
                 {(invoice.lblPoNo !== "" || invoice.poNo !== "") && (
