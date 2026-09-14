@@ -1,4 +1,4 @@
-import { UNITS, BUSINESS_TYPES, emptyItem } from "../lib/calculations";
+import { UNITS, emptyItem } from "../lib/calculations";
 
 export default function InvoiceForm({
   invoice,
