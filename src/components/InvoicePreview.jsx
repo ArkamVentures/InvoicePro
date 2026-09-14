@@ -27,11 +27,13 @@ export default function InvoicePreview({
           <div className="sheet-inner">
             <div className="doc-head">
               <div className="logo-mark">
-                <img
-                  src={invoice.coLogo || "/favicon.png"}
-                  alt="Company Logo"
-                  style={{ maxHeight: 60, maxWidth: 140, objectFit: "contain", marginRight: 12 }}
-                />
+                {invoice.coLogo && (
+                  <img
+                    src={invoice.coLogo}
+                    alt="Company Logo"
+                    style={{ maxHeight: 60, maxWidth: 140, objectFit: "contain", marginRight: 12 }}
+                  />
+                )}
                 <div>
                   <div
                     className="co-name"

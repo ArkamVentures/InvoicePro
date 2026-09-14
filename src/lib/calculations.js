@@ -68,7 +68,7 @@ export function emptyItem() {
 export function defaultInvoice(bizType = "general") {
   return {
     currency: "Rs. ",
-    coLogo: "/favicon.png",
+    coLogo: "",
     coName: "",
     coTagline: "",
     coAddr: "",
