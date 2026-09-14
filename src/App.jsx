@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "./supabaseClient";
 import { defaultInvoice } from "./lib/calculations";
 import { useInvoices } from "./hooks/useInvoices";
@@ -52,11 +52,21 @@ export default function App() {
   const invoices = useInvoices(userId);
 
   // Auto-save every keypress / field edit locally instantly
+  const storageWarnedRef = useRef(false);
   useEffect(() => {
-    if (invoice) {
+    if (!invoice) return;
+    try {
       localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(invoice));
+      storageWarnedRef.current = false; // reset if storage clears up
+    } catch (e) {
+      // localStorage quota exceeded — warn once, don't crash
+      if (!storageWarnedRef.current) {
+        storageWarnedRef.current = true;
+        flashToast("⚠️ Storage full — auto-save paused. Clear browser data to resume.");
+      }
     }
   }, [invoice]);
+
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
