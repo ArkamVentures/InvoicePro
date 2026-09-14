@@ -137,8 +137,8 @@ export default function InvoiceForm({
           <div><label>Due Date</label><input type="date" value={invoice.dueDate || ""} onChange={set("dueDate")} /></div>
         </div>
         <div className="row2">
-          <div><label>GST / Tax Rate (%)</label><input type="number" min="0" step="0.5" value={invoice.gstRate ?? 0} onChange={set("gstRate")} /></div>
-          <div><label>Discount (%)</label><input type="number" min="0" step="0.5" value={invoice.discRate ?? 0} onChange={set("discRate")} /></div>
+          <div><label>GST / Tax Rate (%)</label><input type="number" min="0" step="0.5" value={invoice.gstRate ?? 0} onChange={(e) => onField("gstRate", parseFloat(e.target.value) || 0)} /></div>
+          <div><label>Discount (%)</label><input type="number" min="0" step="0.5" value={invoice.discRate ?? 0} onChange={(e) => onField("discRate", parseFloat(e.target.value) || 0)} /></div>
         </div>
       </fieldset>
 
