@@ -3,12 +3,19 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
+export const supabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+
+if (!supabaseConfigured) {
   // eslint-disable-next-line no-console
   console.warn(
-    "Missing Supabase env vars. Copy .env.example to .env and fill in " +
-      "VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY."
+    "[InvoicePro] Supabase env vars are missing.\n" +
+    "Copy .env.example to .env and fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.\n" +
+    "The app will run in offline / guest-only mode."
   );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Export null when config is absent so callers can detect it and degrade gracefully
+// instead of crashing with createClient(undefined, undefined).
+export const supabase = supabaseConfigured
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase, supabaseConfigured } from "./supabaseClient";
 import { defaultInvoice } from "./lib/calculations";
 import { useInvoices } from "./hooks/useInvoices";
 import Auth from "./components/Auth";
@@ -69,6 +69,11 @@ export default function App() {
 
 
   useEffect(() => {
+    // Skip Supabase auth entirely when env vars are missing — run in offline/guest mode
+    if (!supabaseConfigured || !supabase) {
+      setSession(null);
+      return;
+    }
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
     return () => sub.subscription.unsubscribe();
@@ -219,7 +224,16 @@ export default function App() {
 
   async function signOut() {
     setIsGuest(false);
-    await supabase.auth.signOut();
+    if (supabase) await supabase.auth.signOut();
+    else setSession(null);
+  }
+
+  // When Supabase is not configured and we haven't entered guest mode yet,
+  // auto-enter guest mode so the app is fully usable offline.
+  if (!supabaseConfigured && !isGuest && session === null) {
+    // Silently auto-enter guest mode — no blank screen, no crash
+    setTimeout(() => setIsGuest(true), 0);
+    return <div className="boot-screen">Loading…</div>;
   }
 
   if (session === undefined) {
