@@ -63,7 +63,7 @@ export function computeTotals(items = [], discRate = 0, gstRate = 0) {
 }
 
 export function emptyItem() {
-  return { desc: "New Item / Service", qty: 1, unit: "nos", rate: 0 };
+  return { desc: "New Item / Service", qty: 1, unit: "", rate: 0 };
 }
 
 export function defaultInvoice(bizType = "general") {
@@ -94,7 +94,7 @@ export function defaultInvoice(bizType = "general") {
     bankAcc: "",
     bankIfsc: "",
     items: [
-      { desc: "", qty: 1, unit: "nos", rate: 0 }
+      { desc: "", qty: 1, unit: "", rate: 0 }
     ],
     // Customizable Field Labels
     lblInvTitle: "TAX INVOICE",
